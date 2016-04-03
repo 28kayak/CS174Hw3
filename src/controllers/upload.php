@@ -47,47 +47,84 @@ if($imageFileType != "jpg" && $imageFileType != "jpeg" ) {
 }
 
 //handle exif
-$imagick = new \Imagick();
-$imagick->readImage($image);
-$format = strtolower($imagick->getImageFormat());
+//$image1= imagecreatefromstring(file_get_contents());
+//$exif = exif_read_data($image1);
 
-if ($format === 'jpeg') {
-    $orientation = $imagick->getImageOrientation();
-    $isRotated = false;
-    if ($orientation === \Imagick::ORIENTATION_RIGHTTOP) {
-        $imagick->rotateImage('none', 90);
-        $isRotated = true;
-    } elseif ($orientation === \Imagick::ORIENTATION_BOTTOMRIGHT) {
-        $imagick->rotateImage('none', 180);
-        $isRotated = true;
-    } elseif ($orientation === \Imagick::ORIENTATION_LEFTBOTTOM) {
-        $imagick->rotateImage('none', 270);
-        $isRotated = true;
-    }
-    if ($isRotated) {
-        $imagick->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
+
+$image = imagecreatefromstring(file_get_contents($_FILES['fileToUpload']['tmp_name']));
+$exif = exif_read_data($_FILES['fileToUpload']['tmp_name']);
+echo "Orientation <br>";
+echo $exif['Orientation']."<br>";
+if(!empty($exif['Orientation'])) {
+    switch($exif['Orientation']) {
+        case 1:
+            //nothing to change
+            break;
+        case 2:
+            //upside down
+            $image = imagerotate($iamge, 180,0);
+        case 3:
+            $image = imagerotate($image,180,0);
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            $image = imagerotate($image,-90,0);
+            break;
+
+        case 7:
+            $image1 = imagerotate($image, 90, 0);
+            imageflip ($image1 , IMG_FLIP_HORIZONTAL );
+            echo "came to case 7<br> target file<br>";
+            echo $target_file;
+
+            echo $target_dir."/".$_FILES['fileToUpload']['name'];
+            imagejpeg($image1, $target_file);
+            //write to database
+
+            $sql = "INSERT INTO Image (id ,username,filename, caption, date)
+            VALUES ( ".$_POST['user'] .",".$target_file.",".$_POST["caption"].")";
+
+
+            echo "sql <br>";
+            echo $sql;
+            break;
+        case 8:
+            $image = imagerotate($image,90,0);
+            break;
+
+
     }
 }
+// $image now contains a resource with the image oriented correctly
 
 
 
+
+
+
+
+
+/*
 //------this goes to model--------///
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    echo "<br>Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        echo "<br>The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         echo '<img src="'. $target_dir. '/'. $image. '" alt="'. $image. ">";
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "<br>Sorry, there was an error uploading your file.";
     }
 }
-//*/
 
 
 
+*/
 
 
  ?>
