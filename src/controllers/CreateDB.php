@@ -1,23 +1,33 @@
 <?php
+
 $servername = "localhost";
-$username = "username";
-$password = "password";
+$username = "root";
+$password = "";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+    echo "Connection failed" . $conn->connect_error;
 }
+else{
+  echo "OK to connect<br>";
+  echo "call create DB()";
+  createDB($conn);
+
+}
+
+dropDB($conn);
 
 
 function createDB($conn){
   // Create database
   $sql = "CREATE DATABASE myDB";
   if ($conn->query($sql) === TRUE) {
-      echo "Database created successfully";
+      echo "Database created successfully<br>";
   } else {
-      echo "Error creating database: " . $conn->error;
+      echo "<br>Error creating database: " . $conn->error;
   }
 
 }//create DB
@@ -51,7 +61,17 @@ function createImage(){
     echo "Error creating table: " . $conn->error;
   }
 }
-
+function dropDB($conn){
+  $sql = 'DROP DATABASE myDB';
+  if (mysql_query($sql, $conn))
+  {
+    echo "Database myDB was successfully dropped\n";
+  }
+  else
+  {
+    echo 'Error dropping database: ' . mysql_error() . "\n";
+  }//if-else
+}
 
 function createVoting(){
   $sql = "CREATE TABLE Voting(
@@ -68,6 +88,10 @@ function createVoting(){
     echo "Error creating table: " . $conn->error;
   }
 }
-
+echo "<br>before closing db <br>";
 $conn->close();
+
+//reference to connect to mysql from xampp
+//http://hapisupu.com/2015/11/xampp-5-6-14-version-up-fix-no-security/
+
 ?>
