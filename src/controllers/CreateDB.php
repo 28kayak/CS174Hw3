@@ -90,7 +90,7 @@ function dropDB($conn){
   }//if-else
 }
 
-function createVoting(){
+function createVotingTable(){
   $sql = "CREATE TABLE Voting(
     user VARCHAR(30) NOT NULL,
     filename VARCHAR(50) NOT NULL,
@@ -110,5 +110,26 @@ $conn->close();
 
 //reference to connect to mysql from xampp
 //http://hapisupu.com/2015/11/xampp-5-6-14-version-up-fix-no-security/
+
+
+//To start Mysql on XAMPP
+// $ ps -u mysql
+//  UID   PID TTY           TIME CMD
+//   74   320 ??         2:01.69 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/local/mysql/d
+//Kayas-MacBook-Pro-9:bin kaya$ kill 320
+//-bash: kill: (320) - Operation not permitted
+
+
+//Kill the demon mysql with sudo 
+//Kayas-MacBook-Pro-9:bin kaya$ sudo kill 320
+//Kayas-MacBook-Pro-9:bin kaya$ ps -u mysql
+//  UID   PID TTY           TIME CMD
+
+//Start Mysql
+//Kayas-MacBook-Pro-9:bin kaya$ sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
+//Warning: World-writable config file '/Applications/XAMPP/xamppfiles/etc/my.cnf' is ignored
+//Starting MySQL
+//. SUCCESS!
+
 
 ?>

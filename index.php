@@ -17,13 +17,31 @@
         <tr>
             <td>
                 <div class="img">
-                    <a target="_blank" href="italian-landscape-mountains-nature.jpg">
-                        <img src="italian-landscape-mountains-nature.jpg" alt="Fjords" width="300" height="200">
+                  <?php
+                  /*$files = glob("/src/resources");
+                  $image = $files[1];
+                  echo "<a target='_blank'href='.$image.'>";
+                  echo "<img src='.$image.' alt='flogs' width='300' height='200'>";
 
-                    </a>
-                    <div class="desc">
-                        <p>Add a description of the image here</p>
-                    </div>
+                  echo "</a>";
+                  echo "<div class='desc'>";
+                      echo "<p>Add a description of the image here</p>";
+                  echo "</div>";
+                  */
+
+                  $files = glob("../src/resources");
+
+                  for ($i=1; $i<count($files); $i++)
+                  {
+
+                      $image = $files[$i];
+                      echo $image;
+
+                      print $image ."<br />";
+                      echo '<img src="'.$image .'" alt="Random image" />'."<br /><br />";
+                    }
+                   ?>
+
                 </div>
             </td>
 
