@@ -1,5 +1,5 @@
 <div>
-	<form id='login' action='../controllers/signup_control.php' method='post' >
+	<form id='login' action='../controllers/signup_control.php' method='POST' >
 	<fieldset >
 		<legend>Signup</legend>
 		<label for='username'>UserName:</label><br/>
@@ -10,4 +10,4 @@
 	    <input type='submit' name='Submit' value='Submit' />
 	</fieldset>
 	</form>
-	</div>
+</div>

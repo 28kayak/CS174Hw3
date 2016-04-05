@@ -18,12 +18,12 @@ else{
 
 }
 
-dropDB($conn);
+//dropDB($conn);
 
 
 function createDB($conn){
   // Create database
-  $sql = "CREATE DATABASE myDB";
+  $sql = "CREATE DATABASE Hw3";
   if ($conn->query($sql) === TRUE) {
       echo "Database created successfully<br>";
   } else {
@@ -31,6 +31,23 @@ function createDB($conn){
   }
 
 }//create DB
+
+function createConnection($conn)
+{
+  //$servername = "localhost";
+  //$username = "username";
+  //$password = "password";
+  $dbname = "Hw3";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+}
 
 function createUser(){
   // sql to create table
@@ -47,7 +64,7 @@ function createUser(){
   }
 }
 
-function createImage(){
+function createImageTable(){
   $sql = "CREATE TABLE Images(
     username VARCHAR(30) NOT NULL,
     filename VARCHAR(50) NOT NULL,

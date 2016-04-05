@@ -4,7 +4,7 @@ class resgistUser
 {
   function registUser($username, $password)
   {
-
+  		
   }
 
 

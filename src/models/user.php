@@ -1,14 +1,19 @@
 <?php
+$servername = "localhost";
+$db_username = "root";
+$db_password = "";
+
 class User
 {
 	private $username;
 	private $password;
 
+
 	function __construct($username, $password){
 
 	}
 	function check_login($username, $password){
-		$db = mysqli_connect("localhost","root","root","hw3");
+		$db = mysqli_connect($servername,$db_username,$db_password,"hw3");
 		$query = "select * from User where username=\"".$username."\" and password=\"".$password."\"";
 		//echo $query;
 		$result = mysqli_query($db, $query);
